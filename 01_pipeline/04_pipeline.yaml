@@ -4,7 +4,7 @@ metadata:
   name: build-and-deploy
 spec:
   workspaces:
-  - name: shared-workspace
+  - name: pipelines-tutorial
   params:
   - name: deployment-name
     type: string
@@ -26,7 +26,7 @@ spec:
       kind: ClusterTask
     workspaces:
     - name: output
-      workspace: shared-workspace
+      workspace: pipelines-tutorial
     params:
     - name: url
       value: $(params.git-url)
@@ -47,7 +47,7 @@ spec:
       value: $(params.IMAGE)
     workspaces:
     - name: source
-      workspace: shared-workspace
+      workspace: pipelines-tutorial
     runAfter:
     - fetch-repository
   - name: apply-manifests
@@ -55,7 +55,7 @@ spec:
       name: apply-manifests
     workspaces:
     - name: source
-      workspace: shared-workspace
+      workspace: pipelines-tutorial
     runAfter:
     - build-image
   - name: update-deployment
